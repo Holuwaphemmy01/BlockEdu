@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=blockedu_db'
+      - 'POSTGRES_PASSWORD=s131787'
+      - 'POSTGRES_USER=user'
+    ports:
+      - '5432'

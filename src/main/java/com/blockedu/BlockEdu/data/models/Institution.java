@@ -26,6 +26,8 @@ public class Institution {
     private String officialMail;
     private String officialPhone;
     private String institutionType;
+    private String email;
+    private String password;
     private String twitter;
     private String facebook;
     private String linkedin;

@@ -27,21 +27,41 @@ public class SecurityConfiguration {
     private UserDetailsService userDetailsService;
 
 
+//
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http
+//                .csrf(customizer -> customizer.disable())
+//                .authorizeHttpRequests(requests -> requests
+//                        .requestMatchers("/register", "POST")
+//                        .permitAll()
+//                        .anyRequest().authenticated())
+//                        .logout(Customizer.withDefaults())
+//                .httpBasic(Customizer.withDefaults())
+//                .sessionManagement(session -> session.
+//                        sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+//                .build();
+//
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(customizer -> customizer.disable())
+                .csrf(customizer ->customizer.disable())
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/register")
+                        .requestMatchers("/register", "/login")
+//                        .requestMatchers(new AntPathRequestMatcher("/register", "POST")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/login", "POST")).permitAll()
                         .permitAll()
                         .anyRequest().authenticated())
-                        .logout(Customizer.withDefaults())
+                .logout(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
-                .sessionManagement(session -> session.
-                        sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+
     }
+
 
     @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {

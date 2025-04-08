@@ -1,6 +1,7 @@
 package com.blockedu.BlockEdu.config;
 
 import com.blockedu.BlockEdu.jwt_service.JwtService;
+import com.blockedu.BlockEdu.service.DetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

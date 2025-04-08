@@ -4,21 +4,17 @@ package com.blockedu.BlockEdu.jwt_service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
 import io.jsonwebtoken.Jwts;
-
-import static jdk.jfr.internal.EventWriterKey.getKey;
 
 
 @Service
@@ -73,6 +69,19 @@ public class JwtService {
                 .build()
                 .parseSignedClaims(jwtToken)
                 .getPayload();
+    }
+
+    public boolean validateToken(String jwtToken, UserDetails userDetails) {
+        final String username = extractUsername(jwtToken);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken));
+    }
+
+    private boolean isTokenExpired(String jwtToken) {
+        return extractExpiration(jwtToken).before(new Date());
+    }
+
+    private Date extractExpiration(String jwtToken) {
+        return extractClaim(jwtToken, Claims::getExpiration);
     }
 
 }

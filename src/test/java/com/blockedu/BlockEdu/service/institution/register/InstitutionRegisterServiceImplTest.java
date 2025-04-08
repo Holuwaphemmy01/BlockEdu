@@ -1,5 +1,6 @@
 package com.blockedu.BlockEdu.service.institution.register;
 
+import com.blockedu.BlockEdu.data.dtos.request.InstitutionRegisterRequest;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,9 @@ public class InstitutionRegisterServiceImplTest {
 
 
     @Test
-    public void testThatInstut
-
+    public void testThatInstitutionNameCannotBeEmptyOrNull(){
+        InstitutionRegisterRequest request = new InstitutionRegisterRequest();
+        request.setName("");
+        assertThrows(IllegalArgumentException.class, () -> institutionRegisterServiceImpl.register(request));
+    }
 }

@@ -33,3 +33,4 @@ build/
 .vscode/
 
 .qodo
+src/main/resources/application.properties

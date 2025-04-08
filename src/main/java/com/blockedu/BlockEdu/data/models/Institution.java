@@ -28,10 +28,10 @@ public class Institution {
     private String institutionType;
     private String email;
     private String password;
-    private String twitter;
-    private String facebook;
-    private String linkedin;
-    private String instagram;
+//    private String twitter;
+//    private String facebook;
+//    private String linkedin;
+//    private String instagram;
     @OneToMany
     private List<Student> student;
 

@@ -6,7 +6,6 @@ import com.blockedu.BlockEdu.data.models.Institution;
 import com.blockedu.BlockEdu.exception.DuplicateInstitutionException;
 import com.blockedu.BlockEdu.mapper.InstitutionRegisterRequestMap;
 import com.blockedu.BlockEdu.repository.InstitutionRepository;
-import io.jsonwebtoken.security.Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,16 +31,26 @@ public class InstitutionRegisterServiceImpl implements InstitutionRegisterServic
     @Override
     public InstitutionRegisterResponse register(InstitutionRegisterRequest request) {
 
+        checkDuplicateInDataBase(request);
 
-        Optional<Institution> institution = institutionRepository.findByOfficialMail(request.getOfficialMail());
-        if(institution.isPresent()) throw new DuplicateInstitutionException("Email already exists");
-        Optional<Institution> institution1 = institutionRepository.findByName(request.getName());
-        if(institution1.isPresent()) throw new DuplicateInstitutionException("Name already exists");
-        Optional<Institution> institution2 = institutionRepository.findByOfficialPhone(request.getOfficialPhone());
         Institution mapResponse = institutionRegisterRequestMap.toEntity(request);
+
         mapResponse.setId(UUID.randomUUID());
+
         mapResponse.setPassword(passwordEncoder.encode(mapResponse.getPassword()));
+
         Institution dbResponse = institutionRepository.save(mapResponse);
+
         return  institutionRegisterRequestMap.toResponse(dbResponse);
+    }
+
+
+    private void checkDuplicateInDataBase(InstitutionRegisterRequest request) {
+        Optional<Institution> institution = institutionRepository.findByOfficialMail(request.getOfficialMail());
+        if (institution.isPresent()) throw new DuplicateInstitutionException("Email already exists");
+        Optional<Institution> institution1 = institutionRepository.findByName(request.getName());
+        if (institution1.isPresent()) throw new DuplicateInstitutionException("Name already exists");
+        Optional<Institution> institution2 = institutionRepository.findByOfficialPhone(request.getOfficialPhone());
+        if (institution2.isPresent()) throw new DuplicateInstitutionException("Phone number already exists");
     }
 }

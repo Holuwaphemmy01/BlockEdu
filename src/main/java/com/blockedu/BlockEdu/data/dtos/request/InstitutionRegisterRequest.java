@@ -20,15 +20,13 @@ public class InstitutionRegisterRequest {
     private String city;
     @NotBlank(message = "Admin is required")
     private String admin;
+    @Email
     @NotBlank(message = "Official Mail is required")
     private String officialMail;
     @NotBlank(message = "Official Phone is required")
     private String officialPhone;
     @NotBlank(message = "Institution Type is required")
     private String institutionType;
-    @NotBlank(message = "Email is required")
-    @Email
-    private String email;
     @NotBlank(message = "Password is required")
     private String password;
 

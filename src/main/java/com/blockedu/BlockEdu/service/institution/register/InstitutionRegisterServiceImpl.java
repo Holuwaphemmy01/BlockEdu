@@ -3,6 +3,7 @@ package com.blockedu.BlockEdu.service.institution.register;
 import com.blockedu.BlockEdu.data.dtos.request.InstitutionRegisterRequest;
 import com.blockedu.BlockEdu.data.dtos.response.InstitutionRegisterResponse;
 import com.blockedu.BlockEdu.data.models.Institution;
+import com.blockedu.BlockEdu.exception.DuplicateInstitutionException;
 import com.blockedu.BlockEdu.mapper.InstitutionRegisterRequestMap;
 import com.blockedu.BlockEdu.repository.InstitutionRepository;
 import io.jsonwebtoken.security.Password;
@@ -32,8 +33,11 @@ public class InstitutionRegisterServiceImpl implements InstitutionRegisterServic
     public InstitutionRegisterResponse register(InstitutionRegisterRequest request) {
 
 
-        Optional<Institution> institution = institutionRepository.findByEmail(request.getEmail());
-        if(institution.isPresent()) throw new RuntimeException("Email already exists");
+        Optional<Institution> institution = institutionRepository.findByOfficialMail(request.getOfficialMail());
+        if(institution.isPresent()) throw new DuplicateInstitutionException("Email already exists");
+        Optional<Institution> institution1 = institutionRepository.findByName(request.getName());
+        if(institution1.isPresent()) throw new DuplicateInstitutionException("Name already exists");
+        Optional<Institution> institution2 = institutionRepository.findByOfficialPhone(request.getOfficialPhone());
         Institution mapResponse = institutionRegisterRequestMap.toEntity(request);
         mapResponse.setId(UUID.randomUUID());
         mapResponse.setPassword(passwordEncoder.encode(mapResponse.getPassword()));

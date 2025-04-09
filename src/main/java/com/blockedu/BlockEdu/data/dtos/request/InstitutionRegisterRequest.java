@@ -3,7 +3,6 @@ package com.blockedu.BlockEdu.data.dtos.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -20,7 +19,7 @@ public class InstitutionRegisterRequest {
     @NotBlank(message = "City is required")
     private String city;
     @NotBlank(message = "Admin is required")
-    private String Admin;
+    private String admin;
     @NotBlank(message = "Official Mail is required")
     private String officialMail;
     @NotBlank(message = "Official Phone is required")

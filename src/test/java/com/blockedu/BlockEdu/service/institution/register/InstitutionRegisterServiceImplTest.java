@@ -2,7 +2,6 @@ package com.blockedu.BlockEdu.service.institution.register;
 
 import com.blockedu.BlockEdu.data.dtos.request.InstitutionRegisterRequest;
 import com.blockedu.BlockEdu.data.dtos.response.InstitutionRegisterResponse;
-import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +37,6 @@ public class InstitutionRegisterServiceImplTest {
         assertEquals("Femi", response.getMotto());
         assertEquals("Adelek street", response.getAddress());
     }
+
+
 }

@@ -31,7 +31,6 @@ public class InstitutionRegisterRequestTest {
         institution.setOfficialMail("admin@springuni.edu");
         institution.setOfficialPhone("08012345678");
         institution.setInstitutionType("Private");
-        institution.setEmail("spring@edu.com");
         institution.setPassword("securePassword");
 
         Set<ConstraintViolation<InstitutionRegisterRequest>> violations = validator.validate(institution);

@@ -15,5 +15,4 @@ public class InstitutionRegisterResponse {
     private String officialMail;
     private String officialPhone;
     private String institutionType;
-    private String email;
 }

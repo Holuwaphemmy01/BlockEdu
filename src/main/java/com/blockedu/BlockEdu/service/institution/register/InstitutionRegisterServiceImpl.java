@@ -46,10 +46,10 @@ public class InstitutionRegisterServiceImpl implements InstitutionRegisterServic
 
 
     private void checkDuplicateInDataBase(InstitutionRegisterRequest request) {
-        Optional<Institution> institution = institutionRepository.findByOfficialMail(request.getOfficialMail());
-        if (institution.isPresent()) throw new DuplicateInstitutionException("Email already exists");
         Optional<Institution> institution1 = institutionRepository.findByName(request.getName());
         if (institution1.isPresent()) throw new DuplicateInstitutionException("Name already exists");
+        Optional<Institution> institution = institutionRepository.findByOfficialMail(request.getOfficialMail());
+        if (institution.isPresent()) throw new DuplicateInstitutionException("Email already exists");
         Optional<Institution> institution2 = institutionRepository.findByOfficialPhone(request.getOfficialPhone());
         if (institution2.isPresent()) throw new DuplicateInstitutionException("Phone number already exists");
     }

@@ -28,11 +28,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Optional<Institution> institutionOpt = institutionRepository.findByEmail(email);
+        Optional<Institution> institutionOpt = institutionRepository.findByOfficialMail(email);
         if (institutionOpt.isPresent()) {
             Institution institution = institutionOpt.get();
             return new CustomUserDetails(
-                    institution.getEmail(),
+                    institution.getOfficialMail(),
                     institution.getPassword(),
                     "ROLE_INSTITUTION"
             );

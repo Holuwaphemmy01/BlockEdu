@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,11 +31,13 @@ public class InstitutionRegisterServiceImpl implements InstitutionRegisterServic
     @Override
     public InstitutionRegisterResponse register(InstitutionRegisterRequest request) {
 
+
+        Optional<Institution> institution = institutionRepository.findByEmail(request.getEmail());
+        if(institution.isPresent()) throw new RuntimeException("Email already exists");
         Institution mapResponse = institutionRegisterRequestMap.toEntity(request);
         mapResponse.setId(UUID.randomUUID());
         mapResponse.setPassword(passwordEncoder.encode(mapResponse.getPassword()));
         Institution dbResponse = institutionRepository.save(mapResponse);
-        if(dbResponse == null) throw new RuntimeException("Failed to save institution");
         return  institutionRegisterRequestMap.toResponse(dbResponse);
     }
 }

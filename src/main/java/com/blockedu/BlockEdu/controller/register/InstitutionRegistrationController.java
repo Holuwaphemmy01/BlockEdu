@@ -22,8 +22,8 @@ public class InstitutionRegistrationController {
     public ResponseEntity<?> register(@Valid @RequestBody InstitutionRegisterRequest request) {
         try{
             System.out.println("This is my "+request);
-//            InstitutionRegisterResponse response = institutionRegisterService.register(request);
-             return ResponseEntity.status(201).body("Registration successful");
+            InstitutionRegisterResponse response = institutionRegisterService.register(request);
+             return ResponseEntity.status(201).body(response);
         } catch(RuntimeException runtimeException) {
             return ResponseEntity.badRequest().body(runtimeException.getMessage());
         } catch(Exception e) {

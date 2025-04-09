@@ -5,5 +5,8 @@ services:
       - 'POSTGRES_DB=blockedu_db'
       - 'POSTGRES_PASSWORD=s131787'
       - 'POSTGRES_USER=user'
+      - 'SPRING_PROFILES_ACTIVE=docker'
+
     ports:
       - '5432'
+

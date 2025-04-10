@@ -1,11 +1,12 @@
 package com.blockedu.BlockEdu.data.dtos.response;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+
 public class InstitutionLoginResponse {
+    private String role;
     private String token;
     private String name;
     private String motto;

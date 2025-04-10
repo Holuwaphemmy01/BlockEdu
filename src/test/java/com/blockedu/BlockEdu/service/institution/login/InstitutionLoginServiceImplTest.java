@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.BadCredentialsException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,6 +44,25 @@ public class InstitutionLoginServiceImplTest {
         assertEquals("Femi", institutionLoginResponse.getMotto());
 
         }
+
+
+        @DisplayName("Invalid email cannot access the system")
+        @Test
+        public void testThatInvalidEmailCannotLogin(){
+            InstitutionLoginRequest loginRequest = new InstitutionLoginRequest();
+            loginRequest.setOfficialMail("invalid@gmail.com");
+            loginRequest.setPassword("invalid");
+            assertThrows(BadCredentialsException.class, () -> institutionLoginService.login(loginRequest));
+        }
+
+    @DisplayName("Invalid password cannot access the system")
+    @Test
+    public void testThatValidEmailAndWrongPasswordCannotLogin(){
+        InstitutionLoginRequest loginRequest = new InstitutionLoginRequest();
+        loginRequest.setOfficialMail("Oluwafemi@gmail.com");
+        loginRequest.setPassword("invalid");
+        assertThrows(BadCredentialsException.class, () -> institutionLoginService.login(loginRequest));
+    }
 
 
 

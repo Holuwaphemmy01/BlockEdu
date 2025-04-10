@@ -37,12 +37,16 @@ public class InstitutionLoginServiceImpl implements InstitutionLoginService {
                 new UsernamePasswordAuthenticationToken(request.getOfficialMail(), request.getPassword()));
         String token = jwtTokenProvider.generateToken(authentication);
 
+        String role = authentication.getAuthorities().iterator().next().getAuthority();
+
+
         Institution institution = institutionRepository.findByOfficialMail(request.getOfficialMail())
                 .orElseThrow(() -> new RuntimeException("Institution not found"));
 
-        InstitutionLoginResponse institutionLoginResponse = new InstitutionLoginResponse();
+        InstitutionLoginResponse institutionLoginResponse = institutionLoginMap.toResponse(institution);
         institutionLoginResponse.setToken(token);
-        return institutionLoginMap.toResponse(institution);
+        institutionLoginResponse.setRole(role);
 
+        return institutionLoginResponse;
     }
 }

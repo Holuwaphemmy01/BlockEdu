@@ -17,7 +17,7 @@ public class JwtTokenProvider {
     private String secretKey;
 
     @Value("${jwt.expiration}")
-    private long expirationTime; // Make sure this is in milliseconds
+    private long expirationTime;
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
@@ -27,7 +27,7 @@ public class JwtTokenProvider {
         String role = auth.getAuthorities().iterator().next().getAuthority();
 
         return Jwts.builder()
-                .setSubject(auth.getName()) // Usually the username/email
+                .setSubject(auth.getName())
                 .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))

@@ -20,15 +20,9 @@ public class InstitutionRegistrationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody InstitutionRegisterRequest request) {
-        try{
-            System.out.println("This is my "+request);
-            InstitutionRegisterResponse response = institutionRegisterService.register(request);
-             return ResponseEntity.status(201).body(response);
-        } catch(RuntimeException runtimeException) {
-            return ResponseEntity.badRequest().body(runtimeException.getMessage());
-        } catch(Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+
+        InstitutionRegisterResponse response = institutionRegisterService.register(request);
+        return ResponseEntity.status(201).body(response);
     }
 
 }

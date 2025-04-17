@@ -61,8 +61,6 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
             throw new RuntimeException("Failed to upload credentials " + response.statusCode());
         }
 
-        System.out.println("response "+ response.body());
-
 
         String jsonResponse = response.body();
 
@@ -72,6 +70,9 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
         String blobId = rootNode.path("alreadyCertified").path("blobId").asText();
         uploadCredentialResponse.setCredentialsUploadId(blobId);
+
+
+
 
 
         return uploadCredentialResponse;

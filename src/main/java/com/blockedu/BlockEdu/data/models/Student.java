@@ -15,11 +15,10 @@ public class Student {
     private String studentId;
     private String firstName;
     private String lastName;
-    private File certificate;
-    private File transcript;
     private String email;
     private String password;
     @ManyToOne
     @JoinColumn(name = "institution_id")
     private Institution institution;
+    private String credentialsUploadId;
 }

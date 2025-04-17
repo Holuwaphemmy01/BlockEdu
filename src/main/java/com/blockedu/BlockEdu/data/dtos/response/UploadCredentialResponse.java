@@ -8,4 +8,6 @@ import lombok.Setter;
 public class UploadCredentialResponse {
     private String studentId;
     private String studentMail;
+    private String credentialsUploadId;
+
 }

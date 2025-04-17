@@ -32,6 +32,8 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
     @Override
     public UploadCredentialResponse upload(UploadCredentialRequest uploadCredentialRequest) throws IOException, InterruptedException {
 
+        UploadCredentialResponse uploadCredentialResponse = new UploadCredentialResponse();
+
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -49,7 +51,7 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
 
 
-
+        uploadCredentialResponse.setCredentialsUploadId(response.body());
 
 
 

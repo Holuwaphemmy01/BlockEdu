@@ -22,11 +22,11 @@ public class UploadCredentialServiceImplTest {
 
 
     @Test
-    public void testUploadCredentials() throws IOException {
+    public void testUploadCredentials() throws IOException, InterruptedException {
         UploadCredentialRequest request = new UploadCredentialRequest();
-        Path path = Path.of("web3.txt");
+        Path path = Path.of("src/main/resources/test.txt");
         String name = "file";
-        String originalFileName = "web3.txt";
+        String originalFileName = "test.txt";
         String contentType = "text/plain";
         byte[] content = Files.readAllBytes(path);
         MultipartFile multipartFile = new MockMultipartFile(name, originalFileName, contentType, content);
@@ -38,10 +38,11 @@ public class UploadCredentialServiceImplTest {
         request.setCertificate(multipartFile);
 
         UploadCredentialResponse response = uploadCredentialsService.upload(request);
+        System.out.println("BlobId Test id "+response.getCredentialsUploadId());
         assertNotNull(response);
-        System.out.println(response);
 
+
+        }
 
     }
 
-}

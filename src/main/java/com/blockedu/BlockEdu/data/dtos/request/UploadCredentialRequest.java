@@ -19,9 +19,7 @@ public class UploadCredentialRequest {
     private String institutionId;
     @NotBlank
     private String institutionName;
-    @NotBlank
     private MultipartFile transcript;
-    @NotBlank
     private MultipartFile certificate;
 }
 

@@ -2,6 +2,7 @@ package com.blockedu.BlockEdu.service.institution.upload_credentials;
 
 import com.blockedu.BlockEdu.data.dtos.request.UploadCredentialRequest;
 import com.blockedu.BlockEdu.data.dtos.response.UploadCredentialResponse;
+import com.blockedu.BlockEdu.data.models.Student;
 import com.blockedu.BlockEdu.repository.InstitutionRepository;
 import com.blockedu.BlockEdu.repository.StudentRepository;
 import com.blockedu.BlockEdu.service.email_service.EmailService;
@@ -17,8 +18,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.Optional;
+
 
 @Service
 public class UploadCredentialServiceImpl implements UploadCredentialsService{
@@ -27,7 +28,7 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
     private InstitutionRepository InstitutionRepository;
 
     @Autowired
-    private StudentRepository StudentRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
     private EmailService emailService;
@@ -47,6 +48,9 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
         UploadCredentialResponse uploadCredentialResponse = new UploadCredentialResponse();
 
+
+        Optional<Student> mailExist = studentRepository.findByEmail(uploadCredentialRequest.getStudentMail());
+        if (mailExist.isPresent()) throw new IllegalArgumentException("email already exists");
 
         HttpClient client = HttpClient.newHttpClient();
 

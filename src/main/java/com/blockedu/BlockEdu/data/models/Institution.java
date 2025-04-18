@@ -1,10 +1,7 @@
 package com.blockedu.BlockEdu.data.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,8 +29,8 @@ public class Institution  {
 //    private String facebook;
 //    private String linkedin;
 //    private String instagram;
-    @OneToMany
-    private List<Student> student;
+@OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
+private List<Student> student;
 
 
 }

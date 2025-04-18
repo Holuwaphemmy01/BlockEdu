@@ -2,6 +2,7 @@ package com.blockedu.BlockEdu.service.institution.upload_credentials;
 
 import com.blockedu.BlockEdu.data.dtos.request.UploadCredentialRequest;
 import com.blockedu.BlockEdu.data.dtos.response.UploadCredentialResponse;
+import com.blockedu.BlockEdu.data.models.Institution;
 import com.blockedu.BlockEdu.data.models.Student;
 import com.blockedu.BlockEdu.repository.InstitutionRepository;
 import com.blockedu.BlockEdu.repository.StudentRepository;
@@ -19,6 +20,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -40,7 +42,8 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
     @Value("${blob.upload.epochs}")
     private int epochs;
-
+    @Autowired
+    private InstitutionRepository institutionRepository;
 
 
     @Override
@@ -83,6 +86,22 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
 
         String code = emailService.sendVerificationCode(uploadCredentialRequest.getStudentMail(), uploadCredentialRequest.getFirstName(), uploadCredentialRequest.getLastName());
+
+
+        Optional <Institution> institution = institutionRepository.findById(UUID.fromString(uploadCredentialRequest.getInstitutionId()));
+        if (institution.isEmpty()) throw new IllegalArgumentException("institution not found");
+
+        Student student = new Student();
+        student.setEmail(uploadCredentialRequest.getStudentMail());
+        student.setFirstName(uploadCredentialRequest.getFirstName());
+        student.setLastName(uploadCredentialRequest.getLastName());
+        student.setCredentialsUploadId(blobId);
+        student.setFirstPassword(code);
+        student.setInstitution(institution.get());
+        student.setStudentId(uploadCredentialRequest.getStudentId());
+        studentRepository.save(student);
+
+
 
         System.out.println(code);
 

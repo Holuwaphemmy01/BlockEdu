@@ -46,7 +46,7 @@ public class InstitutionLoginServiceImpl implements InstitutionLoginService {
         InstitutionLoginResponse institutionLoginResponse = institutionLoginMap.toResponse(institution);
         institutionLoginResponse.setToken(token);
         institutionLoginResponse.setRole(role);
-
+        institutionLoginResponse.setId(institution.getId());
         return institutionLoginResponse;
     }
 }

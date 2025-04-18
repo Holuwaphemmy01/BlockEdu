@@ -82,7 +82,6 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         JsonNode rootNode = mapper.readTree(jsonResponse);
 
         String blobId = rootNode.path("alreadyCertified").path("blobId").asText();
-        uploadCredentialResponse.setCredentialsUploadId(blobId);
 
 
         String code = emailService.sendVerificationCode(uploadCredentialRequest.getStudentMail(), uploadCredentialRequest.getFirstName(), uploadCredentialRequest.getLastName());

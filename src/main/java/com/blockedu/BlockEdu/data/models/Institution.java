@@ -29,8 +29,8 @@ public class Institution  {
 //    private String facebook;
 //    private String linkedin;
 //    private String instagram;
-@OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
-private List<Student> student;
+//@OneToMany(mappedBy = "Institution", cascade = CascadeType.ALL)
+//private List<Student> student;
 
 
 }

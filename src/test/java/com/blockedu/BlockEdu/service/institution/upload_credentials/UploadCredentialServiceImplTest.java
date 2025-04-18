@@ -31,10 +31,11 @@ public class UploadCredentialServiceImplTest {
         byte[] content = Files.readAllBytes(path);
         MultipartFile multipartFile = new MockMultipartFile(name, originalFileName, contentType, content);
 
-
         request.setInstitutionId("12345");
         request.setInstitutionName("Semi-colon");
-        request.setStudentMail("femi@mail.com");
+        request.setStudentMail("holuwaphemmy001@gmail.com");
+        request.setFirstName("Oluwafemi");
+        request.setLastName("Jacob");
         request.setCertificate(multipartFile);
 
         UploadCredentialResponse response = uploadCredentialsService.upload(request);

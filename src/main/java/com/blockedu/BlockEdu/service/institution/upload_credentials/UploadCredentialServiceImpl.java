@@ -4,6 +4,7 @@ import com.blockedu.BlockEdu.data.dtos.request.UploadCredentialRequest;
 import com.blockedu.BlockEdu.data.dtos.response.UploadCredentialResponse;
 import com.blockedu.BlockEdu.repository.InstitutionRepository;
 import com.blockedu.BlockEdu.repository.StudentRepository;
+import com.blockedu.BlockEdu.service.email_service.EmailService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
     @Autowired
     private StudentRepository StudentRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Value("${blob.upload.url}")
@@ -35,6 +39,8 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
     @Value("${blob.upload.epochs}")
     private int epochs;
+
+
 
     @Override
     public UploadCredentialResponse upload(UploadCredentialRequest uploadCredentialRequest) throws IOException, InterruptedException {
@@ -72,6 +78,9 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         uploadCredentialResponse.setCredentialsUploadId(blobId);
 
 
+        String code = emailService.sendVerificationCode(uploadCredentialRequest.getStudentMail(), uploadCredentialRequest.getFirstName(), uploadCredentialRequest.getLastName());
+
+        System.out.println(code);
 
 
 

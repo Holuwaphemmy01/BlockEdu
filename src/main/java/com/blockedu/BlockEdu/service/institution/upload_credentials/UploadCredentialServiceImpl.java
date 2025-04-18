@@ -102,10 +102,10 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         studentRepository.save(student);
 
 
-
-        System.out.println(code);
-
-
+        uploadCredentialResponse.setStudentId(uploadCredentialRequest.getStudentId());
+        uploadCredentialResponse.setFirstName(uploadCredentialRequest.getFirstName());
+        uploadCredentialResponse.setLastName(uploadCredentialRequest.getLastName());
+        uploadCredentialResponse.setStudentMail(uploadCredentialRequest.getStudentMail());
 
         return uploadCredentialResponse;
     }

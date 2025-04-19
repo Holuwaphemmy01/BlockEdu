@@ -31,7 +31,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email; // Spring still calls this "username", but we return email
+        return email;
     }
 
     @Override

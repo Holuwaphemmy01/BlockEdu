@@ -34,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             return new CustomUserDetails(
                     institution.getOfficialMail(),
                     institution.getPassword(),
-                    "ROLE_INSTITUTION"
+                    "INSTITUTION"
             );
         }
 
@@ -44,10 +44,10 @@ public class CustomUserDetailsService implements UserDetailsService {
             return new CustomUserDetails(
                     student.getEmail(),
                     student.getPassword(),
-                    "ROLE_STUDENT"
+                    "STUDENT"
             );
         }
 
-        throw new UsernameNotFoundException("User not found with email: " + email);
+        throw new UsernameNotFoundException("Invalid email: ");
     }
 }

@@ -95,10 +95,8 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         student.setPassword(code);
         student.setInstitution(institution.get());
         student.setStudentId(uploadCredentialRequest.getStudentId());
-        System.out.println("This is the student identity number: "+ student.toString());
         studentRepository.save(student);
 
-        System.out.println("This your blobId"+ blobId);
 
         uploadCredentialResponse.setStudentId(uploadCredentialRequest.getStudentId());
         uploadCredentialResponse.setFirstName(uploadCredentialRequest.getFirstName());

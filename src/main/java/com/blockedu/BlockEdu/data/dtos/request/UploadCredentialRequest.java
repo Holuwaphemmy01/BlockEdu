@@ -12,24 +12,19 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 public class UploadCredentialRequest {
     @NotBlank
-    @NotNull
     private String studentId;
     @NotBlank
-    @NotNull
     @Email
     private String studentMail;
     @NotBlank
-    @NotNull
     private String firstName;
     @NotBlank
-    @NotNull
     private String lastName;
     @NotBlank
-    @NotNull
     private String institutionId;
     @NotBlank
     private String institutionName;
-    private MultipartFile transcript;
+//    private MultipartFile transcript;
     private MultipartFile certificate;
 }
 

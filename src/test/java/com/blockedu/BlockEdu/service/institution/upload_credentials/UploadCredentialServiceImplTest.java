@@ -39,7 +39,6 @@ public class UploadCredentialServiceImplTest {
         request.setCertificate(multipartFile);
 
         UploadCredentialResponse response = uploadCredentialsService.upload(request);
-        System.out.println("BlobId Test id "+response.getCredentialsUploadId());
         assertNotNull(response);
 
 

@@ -5,11 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 
 @Getter
 @Setter
+@ToString
 public class Student {
     @Id
     private String studentId;
@@ -25,9 +27,6 @@ public class Student {
     @NotNull
     @NotBlank
     private String password;
-    @NotNull
-    @NotBlank
-    private String firstPassword;
     @ManyToOne
     @JoinColumn(name = "institution_id")
     private Institution institution;

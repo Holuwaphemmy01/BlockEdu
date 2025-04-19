@@ -27,9 +27,6 @@ import java.util.UUID;
 public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
     @Autowired
-    private InstitutionRepository InstitutionRepository;
-
-    @Autowired
     private StudentRepository studentRepository;
 
     @Autowired
@@ -95,9 +92,10 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         student.setFirstName(uploadCredentialRequest.getFirstName());
         student.setLastName(uploadCredentialRequest.getLastName());
         student.setCredentialsUploadId(blobId);
-        student.setFirstPassword(code);
+        student.setPassword(code);
         student.setInstitution(institution.get());
         student.setStudentId(uploadCredentialRequest.getStudentId());
+        System.out.println("This is the student identity number: "+ student.toString());
         studentRepository.save(student);
 
 

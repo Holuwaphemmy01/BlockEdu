@@ -26,6 +26,6 @@ public class UploadCredentialsController {
 
             request.setCertificate(file);
             UploadCredentialResponse response = uploadCredentialsService.upload(request);
-            return ResponseEntity.ok("file recieved successfuuly");
+            return ResponseEntity.ok(response);
     }
 }

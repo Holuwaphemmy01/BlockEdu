@@ -12,13 +12,13 @@ public class LoginResponse {
 
     private String role;
     private String token;
-    private String name;
-    private String motto;
-    private String admin;
     private String email;
     private String studentId;
     private String firstName;
     private String lastName;
+    private String name;
+    private String motto;
+    private String admin;
     private String officialMail;
     private UUID id;
 

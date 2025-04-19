@@ -12,5 +12,4 @@ public interface InstitutionLoginMap {
     InstitutionLoginResponse toResponse (Institution institution);
 
 
-
 }

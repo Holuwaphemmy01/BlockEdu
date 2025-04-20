@@ -30,9 +30,6 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    private InstitutionLoginMap institutionLoginMap;
-
 
     @Override
     public LoginResponse login(UserLoginRequest request) {
@@ -41,6 +38,8 @@ public class UserLoginServiceImpl implements UserLoginService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
+
+        System.out.println("1555525255252525252525252525252525252525");
         String token = jwtTokenProvider.generateToken(authentication);
         String role = authentication.getAuthorities().iterator().next().getAuthority();
 

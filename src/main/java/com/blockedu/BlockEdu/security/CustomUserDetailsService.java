@@ -29,7 +29,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Optional<Institution> institutionOpt = institutionRepository.findByOfficialMail(email);
+
+
         if (institutionOpt.isPresent()) {
+
+            System.out.println("Code reaches here");
             Institution institution = institutionOpt.get();
             return new CustomUserDetails(
                     institution.getOfficialMail(),

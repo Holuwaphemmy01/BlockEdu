@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,6 +42,11 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
     private int epochs;
     @Autowired
     private InstitutionRepository institutionRepository;
+
+
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -92,7 +98,7 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         student.setFirstName(uploadCredentialRequest.getFirstName());
         student.setLastName(uploadCredentialRequest.getLastName());
         student.setCredentialsUploadId(blobId);
-        student.setPassword(code);
+        student.setPassword(passwordEncoder.encode(code));
         student.setInstitution(institution.get());
         student.setStudentId(uploadCredentialRequest.getStudentId());
         studentRepository.save(student);

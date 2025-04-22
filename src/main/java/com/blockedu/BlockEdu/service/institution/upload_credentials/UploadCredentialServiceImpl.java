@@ -33,13 +33,10 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
     @Autowired
     private EmailService emailService;
 
-    private final ObjectMapper mapper = new ObjectMapper();
 
     @Value("${blob.upload.url}")
     private String url;
 
-    @Value("${blob.upload.epochs}")
-    private int epochs;
     @Autowired
     private InstitutionRepository institutionRepository;
 
@@ -64,6 +61,7 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         MultipartFile certificate = uploadCredentialRequest.getCertificate();
         byte[] data = certificate.getBytes();
 
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .PUT(HttpRequest.BodyPublishers.ofByteArray(data))
@@ -71,7 +69,12 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
                 .build();
 
 
+
+
+
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println("this is the status code "+response.statusCode());
 
         if (response.statusCode() != 200) {
             throw new RuntimeException("Failed to upload credentials " + response.statusCode());

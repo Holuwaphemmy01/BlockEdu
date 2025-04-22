@@ -1,7 +1,7 @@
 package com.blockedu.BlockEdu.controller.login;
 
 import com.blockedu.BlockEdu.data.dtos.request.UserLoginRequest;
-import com.blockedu.BlockEdu.service.institution.login.InstitutionLoginService;
+//import com.blockedu.BlockEdu.service.institution.login.InstitutionLoginService;
 import com.blockedu.BlockEdu.service.login.UserLoginServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class InstitutionLoginController {
 
-    @Autowired
-    private InstitutionLoginService institutionLoginService;
+//    @Autowired
+//    private InstitutionLoginService institutionLoginService;
 
     @Autowired
     private UserLoginServiceImpl userLogin;

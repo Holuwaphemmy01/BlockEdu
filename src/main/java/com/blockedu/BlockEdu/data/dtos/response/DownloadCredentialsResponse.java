@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 public class DownloadCredentialsResponse {
 
-    private MultipartFile file;
+    private byte[] file;
     private String studentName;
     private String studentId;
     private String institutionName;

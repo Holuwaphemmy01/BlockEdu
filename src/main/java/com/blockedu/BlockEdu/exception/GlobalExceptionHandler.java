@@ -92,5 +92,25 @@ public class GlobalExceptionHandler {
                 .body("Upload failed: " + ex.getMessage());
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("error", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> handleRuntimeException(RuntimeException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        response.put("error", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 
 }

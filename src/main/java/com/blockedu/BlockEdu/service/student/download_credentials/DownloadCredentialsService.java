@@ -23,7 +23,7 @@ public class DownloadCredentialsService implements DownloadCredentials {
     @Autowired
     private StudentRepository studentRepository;
 
-    @Value("${blob.download.url")
+    @Value("${blob.download.url}")
     private String url;
 
     @Override
@@ -31,12 +31,7 @@ public class DownloadCredentialsService implements DownloadCredentials {
 
         DownloadCredentialsResponse credentialsResponse = new DownloadCredentialsResponse();
 
-        //Optional<Student> student = studentRepository.findById(UUID.fromString(request.getStudentId()));
         Optional<Student> student = studentRepository.findByStudentId(request.getStudentId());
-
-        List<Student> students = studentRepository.findAll();
-
-        System.out.println(students.get(0).toString());
 
         if (student.isPresent()) {
             if(!student.get().getFirstName().equalsIgnoreCase(request.getFirstName()) && student.get().getLastName().equalsIgnoreCase(request.getLastName()))
@@ -44,11 +39,6 @@ public class DownloadCredentialsService implements DownloadCredentials {
         }
         else throw new IllegalArgumentException("Student not found");
 
-        //if(student.isEmpty()) throw new IllegalArgumentException("Student not found");
-
-
-
-        System.out.println("got here");
         String blobId = student.get().getCredentialsUploadId();
 
 
@@ -72,8 +62,11 @@ public class DownloadCredentialsService implements DownloadCredentials {
             throw new RuntimeException("Error while fetching PDF blob: " + e.getMessage(), e);
         }
 
-        credentialsResponse.setInstitutionId("femi");
-        credentialsResponse.setBlockChain("6262626262626262");
+
+        credentialsResponse.setInstitutionName(student.get().getInstitution().getName());
+        credentialsResponse.setInstitutionMotto(student.get().getInstitution().getMotto());
+        credentialsResponse.setStudentName(student.get().getStudentId());
+        credentialsResponse.setBlockChainAddress("6262626262626262");
 
 
         return credentialsResponse;

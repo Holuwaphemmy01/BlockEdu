@@ -46,10 +46,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.ai</groupId>-->
-<!--			<artifactId>spring-ai-pdf-document-reader</artifactId>-->
-<!--		</dependency>-->
 
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
@@ -135,12 +131,6 @@
 			<version>2.3.232</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-redis</artifactId>
-			<version>3.4.4</version>
-		</dependency>
-
 
 	</dependencies>
 	<dependencyManagement>

@@ -2,13 +2,14 @@
 #  postgres:
 #    image: 'postgres:latest'
 #    environment:
-#      - 'POSTGRES_DB=blockedu_db'
+#      - 'POSTGRES_DB=BlockEdu'
 #      - 'POSTGRES_PASSWORD=131787'
-#      - 'POSTGRES_USER=user'
+#      - 'POSTGRES_USER=postgres'
 #      - 'SPRING_PROFILES_ACTIVE=docker'
 #
 #    ports:
 #      - '5432'
+#
 
 
 
@@ -45,9 +46,9 @@ services:
       - postgres
       - redis
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/blockedu_dbs
-      SPRING_DATASOURCE_USERNAME: my_user
-      SPRING_DATASOURCE_PASSWORD: my_user
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/BlockEdu
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 131787
       SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
       SPRING_PROFILES_ACTIVE: docker

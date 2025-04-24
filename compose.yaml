@@ -1,54 +1,11 @@
-#services:
-#  postgres:
-#    image: 'postgres:latest'
-#    environment:
-#      - 'POSTGRES_DB=BlockEdu'
-#      - 'POSTGRES_PASSWORD=131787'
-#      - 'POSTGRES_USER=postgres'
-#      - 'SPRING_PROFILES_ACTIVE=docker'
-#
-#    ports:
-#      - '5432'
-#
-
-
-
-
-version: '3.8'
-
 services:
   postgres:
-    image: postgres:latest
-    container_name: postgres
+    image: 'postgres:latest'
     environment:
+      - 'POSTGRES_DB=BlockEdu'
+      - 'POSTGRES_PASSWORD=131787'
+      - 'POSTGRES_USER=postgres'
+      - 'SPRING_PROFILES_ACTIVE=docker'
 
-      - 'POSTGRES_DB=blockedu_dbs'
-      - 'POSTGRES_USER=my_user'
-      - 'POSTGRES_PASSWORD=my_user'
     ports:
-      - "5432:5432"
-
-
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - "6379:6379"
-
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: blockedu_app
-    ports:
-      - "8000:8000"
-    depends_on:
-      - postgres
-      - redis
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/BlockEdu
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 131787
-      SPRING_REDIS_HOST: redis
-      SPRING_REDIS_PORT: 6379
-      SPRING_PROFILES_ACTIVE: docker
+      - '5432'

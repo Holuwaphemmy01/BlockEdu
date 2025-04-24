@@ -24,9 +24,6 @@ public class UploadCredentialsController {
     public ResponseEntity<?> uploadCredentials(@RequestPart("file") MultipartFile file,
                                                @RequestPart("data") UploadCredentialRequest request ) {
 
-        System.out.println("This is my file"+ file.getOriginalFilename());
-        System.out.println("This is my data"+ request.toString());
-
             request.setCertificate(file);
             UploadCredentialResponse response = uploadCredentialsService.upload(request);
             return ResponseEntity.ok(response);

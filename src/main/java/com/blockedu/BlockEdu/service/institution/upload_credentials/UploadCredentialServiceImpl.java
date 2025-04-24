@@ -52,6 +52,12 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         UploadCredentialResponse uploadCredentialResponse = new UploadCredentialResponse();
 
 
+
+        Optional <Institution> institution = institutionRepository.findById(UUID.fromString(uploadCredentialRequest.getInstitutionId()));
+        if (institution.isEmpty()) throw new IllegalArgumentException("institution not found");
+
+        System.out.println("First ");
+
         Optional<Student> mailExist = studentRepository.findByEmail(uploadCredentialRequest.getStudentMail());
         if (mailExist.isPresent()) throw new IllegalArgumentException("email already exists");
 
@@ -71,7 +77,7 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
 
 
-
+        System.out.println("Second  ");
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         System.out.println("this is the status code "+response.statusCode());
@@ -79,6 +85,7 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         if (response.statusCode() != 200) {
             throw new RuntimeException("Failed to upload credentials " + response.statusCode());
         }
+
 
 
         String jsonResponse = response.body();
@@ -93,8 +100,7 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         String code = emailService.sendVerificationCode(uploadCredentialRequest.getStudentMail(), uploadCredentialRequest.getFirstName(), uploadCredentialRequest.getLastName());
 
 
-        Optional <Institution> institution = institutionRepository.findById(UUID.fromString(uploadCredentialRequest.getInstitutionId()));
-        if (institution.isEmpty()) throw new IllegalArgumentException("institution not found");
+
 
         Student student = new Student();
         student.setEmail(uploadCredentialRequest.getStudentMail());

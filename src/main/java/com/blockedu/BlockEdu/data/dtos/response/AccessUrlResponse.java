@@ -1,6 +1,6 @@
-package com.blockedu.BlockEdu.data.models;
+package com.blockedu.BlockEdu.data.dtos.response;
 
-import jakarta.persistence.Entity;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import lombok.Getter;
@@ -12,25 +12,13 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@Entity
-public class StudentUrlData {
-    @Id
-    private String id = UUID.randomUUID().toString();
-
-    private LocalDateTime createdAt;
-    private LocalDateTime expiresAt;
-
-    @Lob
+public class AccessUrlResponse {
     private byte[] content;
-
     private String firstName;
     private String lastName;
-    private String email;
     private String institutionName;
     private String institutionMotto;
     private String blockChainAddress;
-    private Date credentialsDate;
-
-
+    private LocalDateTime credentialsDate;
 
 }

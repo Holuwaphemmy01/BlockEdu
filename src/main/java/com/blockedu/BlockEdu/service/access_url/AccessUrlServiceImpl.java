@@ -33,6 +33,6 @@ public class AccessUrlServiceImpl implements AccessUrlService {
        // accessUrlResponse.setCredentialsDate();
 
 
-        return null;
+        return accessUrlResponse;
     }
 }

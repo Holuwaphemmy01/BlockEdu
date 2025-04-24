@@ -23,6 +23,7 @@ public class StudentUrlData {
     @Lob
     private byte[] content;
 
+    private String studentId;
     private String firstName;
     private String lastName;
     private String email;
@@ -30,6 +31,7 @@ public class StudentUrlData {
     private String institutionMotto;
     private String blockChainAddress;
     private Date credentialsDate;
+
 
 
 

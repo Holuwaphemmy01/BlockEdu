@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -22,8 +23,13 @@ public class StudentUrlData {
     @Lob
     private byte[] content;
 
-    private String name;
-    private int age;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String institutionName;
+    private String institutionMotto;
+    private String blockChainAddress;
+    private Date credentialsDate;
 
 
 

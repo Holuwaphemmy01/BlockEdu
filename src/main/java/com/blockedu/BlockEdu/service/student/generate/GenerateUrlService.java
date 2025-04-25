@@ -7,7 +7,7 @@ import com.blockedu.BlockEdu.repository.StudentRepository;
 import com.blockedu.BlockEdu.repository.StudentUrlDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.UUID;
 

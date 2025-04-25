@@ -6,6 +6,7 @@ import com.blockedu.BlockEdu.data.models.StudentUrlData;
 import com.blockedu.BlockEdu.repository.StudentRepository;
 import com.blockedu.BlockEdu.repository.StudentUrlDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,6 +24,9 @@ public class AccessUrlServiceImpl implements AccessUrlService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Value("${blob.download.url}")
+    private String blobUrl;
 
 
     @Override
@@ -48,7 +52,7 @@ public class AccessUrlServiceImpl implements AccessUrlService {
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(URI.create(url + blobId))
+                    .uri(URI.create(blobUrl + blobId))
                     .GET()
                     .build();
 

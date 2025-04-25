@@ -21,7 +21,7 @@ public class AccessUrlController {
     @GetMapping("/{url}")
     public ResponseEntity<?> accessUrl(@PathVariable String url) {
 
-        AccessUrlResponse response = accessUrlService.accessUrl(url); // Throws exception if not found
+        AccessUrlResponse response = accessUrlService.accessUrl(url);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);

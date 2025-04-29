@@ -50,7 +50,7 @@ public class InstitutionRegisterServiceImpl implements InstitutionRegisterServic
         if (institution1.isPresent()) throw new DuplicateInstitutionException("Name already exists");
         Optional<Institution> institution = institutionRepository.findByOfficialMail(request.getOfficialMail());
         if (institution.isPresent()) throw new DuplicateInstitutionException("Email already exists");
-        Optional<Institution> institution2 = institutionRepository.findByOfficialPhone(request.getOfficialPhone());
-        if (institution2.isPresent()) throw new DuplicateInstitutionException("Phone number already exists");
+//        Optional<Institution> institution2 = institutionRepository.findByOfficialPhone(request.getPhone());
+//        if (institution2.isPresent()) throw new DuplicateInstitutionException("Phone number already exists");
     }
 }

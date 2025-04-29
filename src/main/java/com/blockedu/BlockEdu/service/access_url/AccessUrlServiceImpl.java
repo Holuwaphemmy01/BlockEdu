@@ -8,12 +8,12 @@ import com.blockedu.BlockEdu.repository.StudentUrlDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -31,6 +31,7 @@ public class AccessUrlServiceImpl implements AccessUrlService {
 
     @Override
     public AccessUrlResponse accessUrl(String url) {
+
 
         Optional<StudentUrlData> studentUrlData = studentUrlDataRepository.findById(url);
 
@@ -58,8 +59,12 @@ public class AccessUrlServiceImpl implements AccessUrlService {
 
             HttpResponse<byte[]> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofByteArray());
 
+            System.out.println("This is the blobId "+ student.get().getCredentialsUploadId());
+            System.out.println("This is status code: " + response.statusCode());
+
             if (response.statusCode() == 200) {
                 studentUrlData.get().setContent(response.body());
+                System.out.println(Arrays.toString(studentUrlData.get().getContent()));
             } else {
                 throw new RuntimeException("Failed to fetch PDF. Status code: " + response.statusCode());
             }
@@ -78,6 +83,7 @@ public class AccessUrlServiceImpl implements AccessUrlService {
         accessUrlResponse.setInstitutionName(studentUrlData.get().getInstitutionName());
         accessUrlResponse.setInstitutionMotto(studentUrlData.get().getInstitutionMotto());
         accessUrlResponse.setBlockChainAddress(studentUrlData.get().getBlockChainAddress());
+        accessUrlResponse.setContent(studentUrlData.get().getContent());
 
        // accessUrlResponse.setCredentialsDate();
 

@@ -32,8 +32,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
         if (institutionOpt.isPresent()) {
-
-            System.out.println("Code reaches here");
             Institution institution = institutionOpt.get();
             return new CustomUserDetails(
                     institution.getOfficialMail(),

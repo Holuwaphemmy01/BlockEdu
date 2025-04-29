@@ -18,7 +18,7 @@ public class AccessUrlController {
     @Autowired
     private AccessUrlService accessUrlService;
 
-    @GetMapping("/{url}")
+    @GetMapping("{url}")
     public ResponseEntity<?> accessUrl(@PathVariable String url) {
 
         AccessUrlResponse response = accessUrlService.accessUrl(url);
@@ -31,6 +31,11 @@ public class AccessUrlController {
                         .build()
         );
         headers.setCacheControl(CacheControl.noStore().getHeaderValue());
+        headers.add("X-First-Name", response.getFirstName());
+        headers.add("X-Last-Name", response.getLastName());
+        headers.add("X-Institution-Name", response.getInstitutionName());
+        headers.add("X-Institution-Motto", response.getInstitutionMotto());
+        headers.add("X-Blockchain-Address", response.getBlockChainAddress());
 
         return ResponseEntity.ok()
                 .headers(headers)

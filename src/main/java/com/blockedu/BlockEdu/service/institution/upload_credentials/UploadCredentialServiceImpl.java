@@ -52,11 +52,14 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         UploadCredentialResponse uploadCredentialResponse = new UploadCredentialResponse();
 
 
+        System.out.println("Code reaches here");
+
 
         Optional <Institution> institution = institutionRepository.findById(UUID.fromString(uploadCredentialRequest.getInstitutionId()));
         if (institution.isEmpty()) throw new IllegalArgumentException("institution not found");
 
         System.out.println("First ");
+        System.out.println("Frontend"+uploadCredentialRequest.toString());
 
         Optional<Student> mailExist = studentRepository.findByEmail(uploadCredentialRequest.getStudentMail());
         if (mailExist.isPresent()) throw new IllegalArgumentException("email already exists");
@@ -77,10 +80,8 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
 
 
-        System.out.println("Second  ");
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println("this is the status code "+response.statusCode());
 
         if (response.statusCode() != 200) {
             throw new RuntimeException("Failed to upload credentials " + response.statusCode());
@@ -95,6 +96,7 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         JsonNode rootNode = mapper.readTree(jsonResponse);
 
         String blobId = rootNode.path("alreadyCertified").path("blobId").asText();
+        if (blobId == null) throw new IllegalArgumentException("Try again");
 
 
         String code = emailService.sendVerificationCode(uploadCredentialRequest.getStudentMail(), uploadCredentialRequest.getFirstName(), uploadCredentialRequest.getLastName());
@@ -107,6 +109,7 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         student.setFirstName(uploadCredentialRequest.getFirstName());
         student.setLastName(uploadCredentialRequest.getLastName());
         student.setCredentialsUploadId(blobId);
+
         student.setPassword(passwordEncoder.encode(code));
         student.setInstitution(institution.get());
         student.setStudentId(uploadCredentialRequest.getStudentId());

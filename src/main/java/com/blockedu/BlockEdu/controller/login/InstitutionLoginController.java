@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class InstitutionLoginController {
 
-//    @Autowired
-//    private InstitutionLoginService institutionLoginService;
+
 
     @Autowired
     private UserLoginServiceImpl userLogin;
 
-    @GetMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody UserLoginRequest loginRequest) {
+    @CrossOrigin("*")
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserLoginRequest loginRequest) {
+        System.out.println("request"+ loginRequest.toString());
         return ResponseEntity.ok(userLogin.login(loginRequest));
     }
 

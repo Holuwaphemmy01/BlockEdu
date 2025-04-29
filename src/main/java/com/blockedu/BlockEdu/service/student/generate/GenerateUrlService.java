@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class GenerateUrlService implements GenerateUrl{
@@ -19,9 +18,6 @@ public class GenerateUrlService implements GenerateUrl{
 
     @Autowired
     private StudentRepository studentRepository;
-
-    @Value("${blob.download.url}")
-    private String url;
 
 
     @Override
@@ -33,15 +29,15 @@ public class GenerateUrlService implements GenerateUrl{
 
         if (student.isEmpty()) throw new IllegalArgumentException("Student not found");
 
-        urlData.setId(UUID.randomUUID().toString());
         urlData.setFirstName(student.get().getFirstName());
         urlData.setLastName(student.get().getLastName());
         urlData.setEmail(student.get().getEmail());
         urlData.setInstitutionName(student.get().getInstitution().getName());
         urlData.setBlockChainAddress("0xtwt7owk222sj7gs4bs200enns00r555suw529msb");
         urlData.setInstitutionMotto(student.get().getInstitution().getMotto());
+        urlData.setStudentId(student.get().getStudentId());
         urlDataRepository.save(urlData);
 
-        return "/studentUrlData/" + urlData.getId();
+        return "/auth/" + urlData.getId();
     }
 }

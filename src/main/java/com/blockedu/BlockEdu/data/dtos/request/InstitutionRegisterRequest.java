@@ -13,8 +13,8 @@ public class InstitutionRegisterRequest {
     private String name;
     @NotBlank(message = "Motto is required")
     private String motto;
-    @NotBlank(message = "Address is required")
-    private String address;
+//    @NotBlank(message = "Address is required")
+//    private String address;
     @NotBlank(message = "State is required")
     private String state;
     @NotBlank(message = "City is required")

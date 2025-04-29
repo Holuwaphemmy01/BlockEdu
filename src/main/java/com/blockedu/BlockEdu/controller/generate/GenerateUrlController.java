@@ -14,7 +14,7 @@ public class GenerateUrlController {
     private GenerateUrlService generateUrlService;
 
 
-    @GetMapping("/generate_url")
+    @PostMapping("/generate_url")
     public ResponseEntity<?> generateUrl(@RequestBody StudentGenerateUrlRequest request) {
         return ResponseEntity.ok(generateUrlService.generateUrl(request));
     }

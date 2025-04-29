@@ -27,6 +27,8 @@ public class Student {
     @NotNull
     @NotBlank
     private String password;
+    @NotNull
+    private boolean firstTimer=true;
     @ManyToOne
     @JoinColumn(name = "institution_id")
     private Institution institution;

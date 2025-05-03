@@ -10,13 +10,13 @@ BlockEdu is a decentralized academic credential issuance and verification platfo
 
 ## 🔧 Tech Stack
 
-| Technology      | Description                                |
+| Technology     | Description                                |
 |----------------|--------------------------------------------|
-| Spring Boot     | Java-based backend framework               |
-| PostgreSQL      | Relational database for storing metadata   |
-| Sui Blockchain  | Immutable ledger for credential verification |
-| Walrus Storage  | Decentralized file storage system for documents |
-| Maven/Gradle    | Dependency & build management              |
+| Spring Boot    | Java-based backend framework               |
+| PostgreSQL     | Relational database for storing metadata   |
+| Sui Blockchain | Immutable ledger for credential verification |
+| Walrus Storage | Decentralized file storage system for documents |
+| Maven/Gradle   | Dependency & build management              |
 
 ---
 
@@ -84,9 +84,9 @@ git clone https://github.com/yourusername/blockedu-backend.git
 cd blockedu-backend
 ```
 
-### Configure `application.yml`
+### Configure `application.properties`
 
-```yaml
+```properties
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/blockedu

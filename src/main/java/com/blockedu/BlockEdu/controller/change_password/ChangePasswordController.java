@@ -18,7 +18,7 @@ public class ChangePasswordController {
     private ChangePasswordService changePasswordService;
 
 
-    @PostMapping("/changePassword")
+    @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request){
         ChangePasswordResponse response = changePasswordService.changePassword(request);
         return ResponseEntity.ok(response);

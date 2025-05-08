@@ -28,10 +28,7 @@ public class UploadCredentialsController {
             @RequestPart("data") String requestJson
     ) throws IOException, InterruptedException {
 
-        System.out.println("Response from frontend "+requestJson.toString());
         UploadCredentialRequest request = objectMapper.readValue(requestJson, UploadCredentialRequest.class);
-
-        System.out.println(request.toString().toString());
 
         request.setCertificate(file);
 

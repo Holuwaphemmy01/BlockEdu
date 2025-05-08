@@ -21,5 +21,6 @@ public class LoginResponse {
     private String admin;
     private String officialMail;
     private UUID id;
+    private boolean studentFirstLogin;
 
 }

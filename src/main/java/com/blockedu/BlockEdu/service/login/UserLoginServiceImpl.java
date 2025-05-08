@@ -54,6 +54,7 @@ public class UserLoginServiceImpl implements UserLoginService {
             response.setEmail(student.get().getEmail());
             response.setRole(role);
             response.setToken(token);
+            response.setStudentFirstLogin(student.get().isFirstLogin());
             return response;
         }
 

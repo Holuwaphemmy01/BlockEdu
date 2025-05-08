@@ -51,15 +51,8 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
 
         UploadCredentialResponse uploadCredentialResponse = new UploadCredentialResponse();
 
-
-        System.out.println("Code reaches here");
-
-
         Optional <Institution> institution = institutionRepository.findById(UUID.fromString(uploadCredentialRequest.getInstitutionId()));
         if (institution.isEmpty()) throw new IllegalArgumentException("institution not found");
-
-        System.out.println("First ");
-        System.out.println("Frontend"+uploadCredentialRequest.toString());
 
         Optional<Student> mailExist = studentRepository.findByEmail(uploadCredentialRequest.getStudentMail());
         if (mailExist.isPresent()) throw new IllegalArgumentException("email already exists");
@@ -88,20 +81,17 @@ public class UploadCredentialServiceImpl implements UploadCredentialsService{
         }
 
 
-
         String jsonResponse = response.body();
 
         ObjectMapper mapper = new ObjectMapper();
 
         JsonNode rootNode = mapper.readTree(jsonResponse);
 
-        String blobId = rootNode.path("alreadyCertified").path("blobId").asText();
-        if (blobId == null) throw new IllegalArgumentException("Try again");
+        String blobId = rootNode.path("newlyCreated").path("blobObject").path("blobId").asText();
 
+        if (blobId.isEmpty()) throw new IllegalArgumentException("Try again");
 
         String code = emailService.sendVerificationCode(uploadCredentialRequest.getStudentMail(), uploadCredentialRequest.getFirstName(), uploadCredentialRequest.getLastName());
-
-
 
 
         Student student = new Student();

@@ -15,7 +15,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class DownloadCredentialsService implements DownloadCredentials {
@@ -31,9 +30,17 @@ public class DownloadCredentialsService implements DownloadCredentials {
 
         DownloadCredentialsResponse credentialsResponse = new DownloadCredentialsResponse();
 
+        List<Student> allStudent = studentRepository.findAll();
+        System.out.println("This all the student "+allStudent.toString());
+
+        System.out.println("This is the student id"+ request.getStudentId());
+
         Optional<Student> student = studentRepository.findByStudentId(request.getStudentId());
 
         if (student.isPresent()) {
+            System.out.println("This is the student details "+student.toString());
+            if(student.get().getFirstName().equalsIgnoreCase(request.getFirstName())) System.out.println("firstName correct");
+            if (student.get().getLastName().equalsIgnoreCase(request.getLastName())) System.out.println("lastName is correct");
             if(!student.get().getFirstName().equalsIgnoreCase(request.getFirstName()) && student.get().getLastName().equalsIgnoreCase(request.getLastName()))
                 throw new IllegalArgumentException("Student not found");
         }
@@ -67,7 +74,6 @@ public class DownloadCredentialsService implements DownloadCredentials {
         credentialsResponse.setInstitutionMotto(student.get().getInstitution().getMotto());
         credentialsResponse.setStudentName(student.get().getStudentId());
         credentialsResponse.setBlockChainAddress("6262626262626262");
-
 
         return credentialsResponse;
     }

@@ -20,17 +20,6 @@ public class DownloadCredentialsController {
 
     @PostMapping("/download_credential")
     public ResponseEntity<?> downloadCredentials(@RequestBody DownloadCredentialsRequest request) {
-        DownloadCredentialsResponse res =downloadCredentialsService.download(request);
-
-        byte[] fileContent = res.getFile();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", "certificate.pdf"); // Change filename as needed
-
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .body(fileContent);
+        return ResponseEntity.ok(downloadCredentialsService.download(request));
     }
 }

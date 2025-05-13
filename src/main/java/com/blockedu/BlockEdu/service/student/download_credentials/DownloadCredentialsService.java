@@ -30,11 +30,6 @@ public class DownloadCredentialsService implements DownloadCredentials {
 
         DownloadCredentialsResponse credentialsResponse = new DownloadCredentialsResponse();
 
-        List<Student> allStudent = studentRepository.findAll();
-        System.out.println("This all the student "+allStudent.toString());
-
-        System.out.println("This is the student id"+ request.getStudentId());
-
         Optional<Student> student = studentRepository.findByStudentId(request.getStudentId());
 
         if (student.isPresent()) {
@@ -70,9 +65,10 @@ public class DownloadCredentialsService implements DownloadCredentials {
         }
 
 
+        credentialsResponse.setStudentName(student.get().getFirstName() + " "+ student.get().getLastName());
         credentialsResponse.setInstitutionName(student.get().getInstitution().getName());
         credentialsResponse.setInstitutionMotto(student.get().getInstitution().getMotto());
-        credentialsResponse.setStudentName(student.get().getStudentId());
+        credentialsResponse.setStudentId(student.get().getStudentId());
         credentialsResponse.setBlockChainAddress("6262626262626262");
 
         return credentialsResponse;

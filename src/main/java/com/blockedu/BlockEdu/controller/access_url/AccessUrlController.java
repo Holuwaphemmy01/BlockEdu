@@ -21,25 +21,27 @@ public class AccessUrlController {
     @GetMapping("{url}")
     public ResponseEntity<?> accessUrl(@PathVariable String url) {
 
-        AccessUrlResponse response = accessUrlService.accessUrl(url);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDisposition(
-                ContentDisposition.inline()
-                        .filename(response.getFirstName() + response.getLastName() + ".pdf")
-                        .build()
-        );
-        headers.setCacheControl(CacheControl.noStore().getHeaderValue());
-        headers.add("X-First-Name", response.getFirstName());
-        headers.add("X-Last-Name", response.getLastName());
-        headers.add("X-Institution-Name", response.getInstitutionName());
-        headers.add("X-Institution-Motto", response.getInstitutionMotto());
-        headers.add("X-Blockchain-Address", response.getBlockChainAddress());
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(new ByteArrayResource(response.getContent()));
+//        AccessUrlResponse response = accessUrlService.accessUrl(url);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_PDF);
+//        headers.setContentDisposition(
+//                ContentDisposition.inline()
+//                        .filename(response.getFirstName() + response.getLastName() + ".pdf")
+//                        .build()
+//        );
+//        headers.setCacheControl(CacheControl.noStore().getHeaderValue());
+//        headers.add("X-First-Name", response.getFirstName());
+//        headers.add("X-Last-Name", response.getLastName());
+//        headers.add("X-Institution-Name", response.getInstitutionName());
+//        headers.add("X-Institution-Motto", response.getInstitutionMotto());
+//        headers.add("X-Blockchain-Address", response.getBlockChainAddress());
+//
+//        return ResponseEntity.ok()
+//                .headers(headers)
+//                .body(new ByteArrayResource(response.getContent()));
+        return ResponseEntity.ok(accessUrlService.accessUrl(url));
 
     }
 }

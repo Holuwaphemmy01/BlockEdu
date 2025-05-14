@@ -34,3 +34,4 @@ build/
 
 .qodo
 #src/main/resources/application.properties
+.env

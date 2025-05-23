@@ -23,10 +23,11 @@ public class EmailService {
         String code = VerificationCode.generateVerificationCode();
         String body = String.format("""
                 Dear %s %s,
-                To have access to your credentials on BlockEdu platform 
+                To have access to your credentials on BlockEdu platform
                 This is your log-in details
                 Email: %s
                 Password: %s
+                https://block-edu-front-end.vercel.app/login
                 """, firstName, lastName, receiverMail, code);
 
         SimpleMailMessage message = new SimpleMailMessage();

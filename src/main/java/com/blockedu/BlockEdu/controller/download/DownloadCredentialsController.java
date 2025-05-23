@@ -15,6 +15,7 @@ public class DownloadCredentialsController {
     private DownloadCredentialsService downloadCredentialsService;
 
 
+    @CrossOrigin("*")
     @PostMapping("/download_credential")
     public ResponseEntity<?> downloadCredentials(@RequestBody DownloadCredentialsRequest request) {
         return ResponseEntity.ok(downloadCredentialsService.download(request));

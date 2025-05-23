@@ -1,11 +1,8 @@
 package com.blockedu.BlockEdu.controller.download;
 
 import com.blockedu.BlockEdu.data.dtos.request.DownloadCredentialsRequest;
-import com.blockedu.BlockEdu.data.dtos.response.DownloadCredentialsResponse;
 import com.blockedu.BlockEdu.service.student.download_credentials.DownloadCredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

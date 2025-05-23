@@ -22,6 +22,7 @@ public class UploadCredentialsController {
     @Autowired
     private ObjectMapper objectMapper; // inject ObjectMapper
 
+    @CrossOrigin("*")
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadCredentials(
             @RequestPart("file") MultipartFile file,
